@@ -1,6 +1,7 @@
 import express from 'express';
 import { config } from 'dotenv';
 import userRouter from './routes/user.js'
+import transactionRouter from './routes/transaction.js'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import Redis from 'ioredis';
@@ -10,9 +11,9 @@ config()
 const app = express()
 
 export const redis = new Redis({
-    host: 'redis-14300.c261.us-east-1-4.ec2.redns.redis-cloud.com',
-    port: 14300,
-    password: '3ZjUfqNbNoxL2ktNG7BYwtsiAWCB3Bxq'
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PSWD
 })
 redis.on('connect', () => {
     console.log('Connected to Redis')
@@ -34,6 +35,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/v1/user', userRouter)
+app.use('/api/v1/transaction', transactionRouter)
 
 const port = process.env.PORT
 

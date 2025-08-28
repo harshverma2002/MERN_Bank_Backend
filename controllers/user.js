@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt'
 import { createCookie } from '../utils/cookie.js'
 import User from '../models/user.js'
 import {redis} from '../index.js'
-import cookieParser from 'cookie-parser'
 
 export const getBalance = async(req,res,next)=>{
     try{
@@ -14,6 +13,8 @@ export const getBalance = async(req,res,next)=>{
             balance = user.balance
             await redis.set(`UserBalance:${userid}:balance`,balance)
         }
+        else balance = parseInt(balance)
+        
         res.status(200).json({
             success:true,
             balance
