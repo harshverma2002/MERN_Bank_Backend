@@ -71,7 +71,7 @@ export const transferAmnt=async(req,res,next)=>{
                 credit: amount,
                 remnBalance: receiverUser.balance
             }
-        ], { session })
+        ], { session, ordered: true })
 
         await session.commitTransaction()
     } catch (error) {

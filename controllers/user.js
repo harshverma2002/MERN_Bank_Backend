@@ -151,3 +151,13 @@ export const logOut = async(req,res,next)=>{
         next(e)
     }
 }
+
+export const accDelete = async(req,res,next)=>{
+
+}
+
+export const txnHistory = async(req,res,next)=>{
+
+}
+
+
